@@ -1,2 +1,3 @@
 # go-getter
-Fetch URLs over HTTP in parallel
+
+Fetch URLs over HTTP in parallel.
