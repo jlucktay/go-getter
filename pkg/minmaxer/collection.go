@@ -10,7 +10,7 @@ type Collection struct {
 	values           []uint
 	minimum, maximum uint
 	sum              uint64
-	sync.Mutex
+	mtx              sync.Mutex
 }
 
 func New() *Collection {
@@ -23,8 +23,8 @@ func New() *Collection {
 }
 
 func (c *Collection) Add(v uint) {
-	c.Lock()
-	defer c.Unlock()
+	c.mtx.Lock()
+	defer c.mtx.Unlock()
 
 	c.values = append(c.values, v)
 
@@ -40,29 +40,29 @@ func (c *Collection) Add(v uint) {
 }
 
 func (c *Collection) Minimum() uint {
-	c.Lock()
-	defer c.Unlock()
+	c.mtx.Lock()
+	defer c.mtx.Unlock()
 
 	return c.minimum
 }
 
 func (c *Collection) Maximum() uint {
-	c.Lock()
-	defer c.Unlock()
+	c.mtx.Lock()
+	defer c.mtx.Unlock()
 
 	return c.maximum
 }
 
 func (c *Collection) Count() int {
-	c.Lock()
-	defer c.Unlock()
+	c.mtx.Lock()
+	defer c.mtx.Unlock()
 
 	return len(c.values)
 }
 
 func (c *Collection) Sum() uint64 {
-	c.Lock()
-	defer c.Unlock()
+	c.mtx.Lock()
+	defer c.mtx.Unlock()
 
 	return c.sum
 }
